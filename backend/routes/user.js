@@ -18,7 +18,7 @@ router.post('/signup', async (req,res)=> {
     const {success} = signupBody.safeParse(req.body)
     if(!success){
         return res.status(411).json({
-            message: "email already taken"
+            message: "email already taken/incorrect inputs"
         })
     }
 
