@@ -1,1 +1,20 @@
-Developed a digital wallet for managing digital funds, performing transactions, and viewing transaction history.
+# TranSact
+
+TranSact is a digital wallet application that allows users to create accounts, send money to other users, and manage their finances digitally.
+
+## Features
+
+- **User Authentication**: Utilizes JWT (JSON Web Token) for secure user authentication and authorization.
+- **Account Creation**: Users can easily create accounts to start using the digital wallet services.
+- **Wallet Balance**: Upon signing in, users automatically receive 10,000 rupees in their digital wallet balance.
+- **Send Money**: Users can send money to other TranSact users seamlessly within the application.
+- **Transaction History**: Keeps track of transaction history for transparency and record-keeping purposes.
+
+## Technologies Used
+
+- **Frontend**: React
+- **Styling**: Tailwind CSS
+- **Backend**: Express.js
+- **Database**: MongoDB
+
+
