@@ -6,7 +6,7 @@ TranSact is a digital wallet application that allows users to create accounts, s
 
 - **User Authentication**: Utilizes JWT (JSON Web Token) for secure user authentication and authorization.
 - **Account Creation**: Users can easily create accounts to start using the digital wallet services.
-- **Wallet Balance**: Upon signing in, users automatically receive a random amount of money in teh range of 10000-19000.
+- **Wallet Balance**: Upon signing in, users automatically receive a random amount of money in the range of 10000-19000.
 - **Send Money**: Users can send money to other TranSact users seamlessly within the application.
 - **Transaction History**: Keeps track of transaction history for transparency and record-keeping purposes.
 
