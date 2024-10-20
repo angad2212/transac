@@ -12,8 +12,7 @@ TranSact is a digital wallet application that allows users to create accounts, s
 
 ## Technologies Used
 
-- **Frontend**: React
-- **Styling**: Tailwind CSS
+- **Frontend**: React, CSS, JavaScript
 - **Backend**: Express.js
 - **Database**: MongoDB
 
