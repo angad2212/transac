@@ -17,7 +17,7 @@ const transferRateLimiter = rateLimit({
   keyGenerator: (req) => req.userId || req.ip, // Track by userId or IP
 });
 
-router.get("/balance", authMiddleware, async (req, res) => {
+router.get("/balance", authMiddleware, async (req, res) => { //tested
     const account = await Account.findOne({
         userId: req.userId
     });
@@ -27,7 +27,7 @@ router.get("/balance", authMiddleware, async (req, res) => {
     })
 });
 
-router.post("/transfer", authMiddleware, transferRateLimiter, async (req, res) => {
+router.post("/transfer", authMiddleware, transferRateLimiter, async (req, res) => { //tested
     const session = await mongoose.startSession();
 
     session.startTransaction();

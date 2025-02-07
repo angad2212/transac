@@ -14,7 +14,7 @@ const signupBody= zod.object({
     lastName: zod.string()
 })
 
-router.post('/signup', async (req,res)=> {
+router.post('/signup', async (req,res)=> { //tested
     const {success} = signupBody.safeParse(req.body)
     if(!success){
         return res.status(411).json({
@@ -65,7 +65,7 @@ const signinBody = zod.object({
   password: zod.string()
 });
 
-router.post('/signin', async (req, res) => {
+router.post('/signin', async (req, res) => { //tested
   const { success } = signinBody.safeParse(req.body);
   if (!success) {
       return res.status(400).json({
@@ -101,21 +101,40 @@ const updateBody = zod.object({
     lastName: zod.string().optional(),
 })
 
-router.put('/', authMiddleware, async(req,res)=>{
-    const {success} = updateBody.safeParse(req.body)
-    if(!success){
-        res.status(411).json({
-            message: "error while updating the values"
-        })
+router.put('/', authMiddleware, async (req, res) => { //gives error
+  try {
+    const { success, error } = updateBody.safeParse(req.body);
+
+    if (!success) {
+      return res.status(400).json({
+        message: "Error while updating the values",
+        error: error.issues,
+      });
     }
-    await User.updateOne({ _id: req.userId }, req.body);
 
-    res.json({
-        message: "Updated successfully"
-    })
-})
+    const { username, ...updateFields } = req.body;
 
-router.get("/bulk", async (req, res) => {
+    const result = await User.updateOne({ _id: req.userId }, updateFields);
+
+    if (result.nModified === 0) {
+      return res.status(404).json({ message: "User not found or no data changed" });
+    }
+
+    res.json({ message: "Updated successfully" });
+  } catch (err) {
+    if (err.code === 11000) {
+      return res.status(409).json({
+        message: `Duplicate value error for ${Object.keys(err.keyPattern).join(", ")}`,
+        keyValue: err.keyValue,
+      });
+    }
+    console.error("Error updating user:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
+router.get("/bulk", async (req, res) => { //tested
     const filter = req.query.filter || "";
 
     const users = await User.find({
