@@ -4,7 +4,7 @@ dotenv.config();
 
 const MONGODB_URL = process.env.MONGODB_URL
 
-mongoose.connect('mongodb+srv://angad2212:mongo123@cluster0.rjx9sao.mongodb.net/transact')
+mongoose.connect(MONGODB_URL)
 
 const userSchema = new mongoose.Schema({
     username: {
