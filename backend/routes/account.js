@@ -3,8 +3,19 @@ const express = require('express');
 const { authMiddleware } = require('../middleware');
 const { Account } = require('../db');
 const { default: mongoose } = require('mongoose');
+const rateLimit = require('express-rate-limit');
 
 const router = express.Router();
+
+//rate limiting:
+const transferRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes window
+  max: 5, // Limit each user to 5 requests per windowMs
+  message: {
+      message: "Too many transfer requests. Please try again later."
+  },
+  keyGenerator: (req) => req.userId || req.ip, // Track by userId or IP
+});
 
 router.get("/balance", authMiddleware, async (req, res) => {
     const account = await Account.findOne({
@@ -16,7 +27,7 @@ router.get("/balance", authMiddleware, async (req, res) => {
     })
 });
 
-router.post("/transfer", authMiddleware, async (req, res) => {
+router.post("/transfer", authMiddleware, transferRateLimiter, async (req, res) => {
     const session = await mongoose.startSession();
 
     session.startTransaction();

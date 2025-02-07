@@ -5,7 +5,6 @@ const { JWT_SECRET } = require("../config");
 const  { authMiddleware } = require("../middleware");
 const { User, Account } = require("../db"); //importing the user form the database
 
-
 const router = express.Router();
 
 const signupBody= zod.object({
@@ -59,6 +58,7 @@ router.post('/signup', async (req,res)=> {
         token: token
     })
 })
+
 
 const signinBody = zod.object({
   username: zod.string().email(),
