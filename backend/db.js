@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+dotenv.config();
+
+const MONGODB_URL = process.env.MONGODB_URL
 
 mongoose.connect('mongodb+srv://angad2212:mongo123@cluster0.rjx9sao.mongodb.net/transact')
 
