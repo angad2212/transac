@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/Dashboard";
+import { Signin } from "./pages/Signin";
+import { Signup } from "./pages/Signup";
+import { SendMoney } from "./pages/SendMoney";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <div className="appContainer">
         <Routes>
-          <Route path='/' element={<h1>Dashboard</h1>} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/send-money" element={<SendMoney />} />
         </Routes>
       </div>
     </BrowserRouter>

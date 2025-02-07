@@ -10,6 +10,13 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
 app.use(cors());
 //It allows your server to accept requests from different origins (other domains).
 //since our frontend runs on a seperate server
