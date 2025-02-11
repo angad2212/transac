@@ -9,12 +9,10 @@ const router = express.Router();
 
 //rate limiting:
 const transferRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes window
-  max: 5, // Limit each user to 5 requests per windowMs
-  message: {
-      message: "Too many transfer requests. Please try again later."
-  },
-  keyGenerator: (req) => req.userId || req.ip, // Track by userId or IP
+  windowMs: 60 * 1000, // 1 minute window
+  max: 5, // Allow 5 transactions per minute
+  message: { message: "Too many transfer requests. Try again later." },
+  keyGenerator: (req) => req.userId || req.ip, // Identify users by ID or IP
 });
 
 router.get("/balance", authMiddleware, async (req, res) => { //tested
