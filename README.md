@@ -9,6 +9,7 @@ TranSact is a digital wallet application that allows users to create accounts, s
 - **Wallet Balance**: Upon signing in, users automatically receive a random amount of money in the range of 10000-19000.
 - **Send Money**: Users can send money to other TranSact users seamlessly within the application.
 - **Transaction History**: Keeps track of transaction history for transparency and record-keeping purposes.
+- **Rate Limit**: Limited a user to send more than 5 requests per minute and limited a particular IP to send more than 20 requests per second.
 
 ## Technologies Used
 
