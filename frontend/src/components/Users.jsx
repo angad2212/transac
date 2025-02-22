@@ -10,11 +10,20 @@ export const Users = () => {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/v1/user/bulk?filter=" + filter)
-            .then(response => {
-                setUsers(response.data.user)
-            })
-    }, [filter])
+      const token = localStorage.getItem("token"); // Assuming you stored the JWT here
+  
+      axios.get("http://localhost:3001/api/v1/user/bulk?filter=" + filter, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      })
+      .then(response => {
+          setUsers(response.data.user);
+      })
+      .catch(err => {
+          console.error("Error fetching users:", err);
+      });
+  }, [filter]);
 
     return <div className="">
         <div className="font-bold mt-6 text-lg">

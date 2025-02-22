@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
+        unique: true, // Ensures unique values
         trim: true,
         lowercase: true,
         minLength: 3,
@@ -27,11 +27,14 @@ const userSchema = new mongoose.Schema({
         trim: true,
         maxLength: 50
     }
-})
+});
+
+// Apply index on username for faster lookups
+userSchema.index({ username: 1 }); // 1 for ascending order
 
 const accountSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId, // Reference to User model
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
@@ -39,12 +42,15 @@ const accountSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-})
+});
+
+// Index userId for optimized joins and lookups
+accountSchema.index({ userId: 1 });
 
 const User = mongoose.model('User', userSchema);
 const Account = mongoose.model('Account', accountSchema);
 
-module.exports ={
+module.exports = {
     User,
     Account
 };

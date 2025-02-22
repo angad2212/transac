@@ -9,9 +9,9 @@ function App() {
     <BrowserRouter>
       <div className="appContainer">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Signup />} />
           <Route path="/send-money" element={<SendMoney />} />
         </Routes>
       </div>

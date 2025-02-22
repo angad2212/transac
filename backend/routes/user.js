@@ -133,30 +133,34 @@ router.put('/', authMiddleware, async (req, res) => { //gives error
   }
 });
 
-
 router.get("/bulk", async (req, res) => { //tested
-    const filter = req.query.filter || "";
+  const filter = req.query.filter || "";
+  const loggedInUserId = req.user._id; // Assuming req.user is populated
 
-    const users = await User.find({
-        $or: [{
-            firstName: {
-                "$regex": filter
-            }
-        }, {
-            lastName: {
-                "$regex": filter
-            }
-        }]
-    })
+  try {
+      const users = await User.find({
+          $and: [
+              {
+                  $or: [
+                      { firstName: { "$regex": filter, "$options": "i" } }, // Case-insensitive search
+                      { lastName: { "$regex": filter, "$options": "i" } }
+                  ]
+              },
+              { _id: { $ne: loggedInUserId } } // Exclude logged-in user
+          ]
+      });
 
-    res.json({
-        user: users.map(user => ({
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            _id: user._id
-        }))
-    })
-})
+      res.json({
+          user: users.map(user => ({
+              username: user.username,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              _id: user._id
+          }))
+      });
+  } catch (err) {
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
