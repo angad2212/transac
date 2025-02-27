@@ -29,8 +29,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Apply index on username for faster lookups
-userSchema.index({ username: 1 }); // 1 for ascending order
 
 const accountSchema = new mongoose.Schema({
     userId: {
@@ -44,8 +42,6 @@ const accountSchema = new mongoose.Schema({
     }
 });
 
-// Index userId for optimized joins and lookups
-accountSchema.index({ userId: 1 });
 
 const User = mongoose.model('User', userSchema);
 const Account = mongoose.model('Account', accountSchema);
