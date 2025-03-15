@@ -38,11 +38,11 @@ export const Signin = () => {
                     navigate("/dashboard");
                 } else {
                     console.error("No token received:", response.data);
-                    alert("Signup failed. No token received.");
+                    // alert("Signup failed. No token received.");
                 }
             } catch (error) {
                 console.error("Signin Error:", error.response?.data || error.message);
-                alert(error.response?.data?.message || "Signin failed. Please try again.");
+                // alert(error.response?.data?.message || "Signin failed. Please try again.");
             }
         }} label={"Sign in"} />
         </div>
