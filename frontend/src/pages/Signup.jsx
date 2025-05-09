@@ -34,12 +34,22 @@ export const Signup = () => {
         <div className="pt-4">
         <Button onClick={async () => {
             try {
-                const response = await axios.post("http://localhost:3001/api/v1/user/signup", {
-                    username,
-                    firstName,
-                    lastName,
-                    password
-                });
+              const response = await axios.post(
+                "http://localhost:3001/api/v1/user/signup",
+                {
+                  username,
+                  firstName,
+                  lastName,
+                  password
+                },
+                {
+                  withCredentials: true, // <-- Important for cookies/sessions
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                }
+              );
+              
 
                 if (response.data && response.data.token) {
                     localStorage.setItem("token", response.data.token);
