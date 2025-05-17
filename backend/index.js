@@ -21,7 +21,9 @@ app.use((req, res, next) => {
 //It allows your server to accept requests from different origins (other domains).
 //since our frontend runs on a seperate server
 
-app.use(cors());
+app.use(cors(
+  {origin: '*'}
+));
 
 app.use(express.json());
 
