@@ -43,7 +43,6 @@ export const Signup = () => {
                   password
                 },
                 {
-                  withCredentials: true, // <-- Important for cookies/sessions
                   headers: {
                     "Content-Type": "application/json"
                   }
